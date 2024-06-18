@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.music.MusicFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <!-- Adventure -->
+        <TextView
+            android:id="@+id/title_adventure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/text_black_color"
+            android:text="@string/adventure"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAdventureMusic"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_song"
+            app:layout_constraintTop_toBottomOf="@id/title_adventure"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Adventure Two -->
+        <TextView
+            android:id="@+id/title_adventureTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/text_black_color"
+            android:text="@string/adventure02"
+            app:layout_constraintTop_toBottomOf="@id/rvAdventureMusic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAdventureTwoMusic"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_song"
+            app:layout_constraintTop_toBottomOf="@id/title_adventureTwo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Tamers -->
+        <TextView
+            android:id="@+id/title_tamers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/text_black_color"
+            android:text="@string/tamers"
+            app:layout_constraintTop_toBottomOf="@id/rvAdventureTwoMusic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTamersMusic"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_song"
+            app:layout_constraintTop_toBottomOf="@id/title_tamers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <!-- Frontier -->
+        <TextView
+            android:id="@+id/title_frontier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/text_black_color"
+            android:text="@string/frontier"
+            app:layout_constraintTop_toBottomOf="@id/rvTamersMusic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFrontierMusic"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_song"
+            app:layout_constraintTop_toBottomOf="@id/title_frontier"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+        <!-- Savers -->
+        <TextView
+            android:id="@+id/title_savers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/text_black_color"
+            android:text="@string/savers"
+            app:layout_constraintTop_toBottomOf="@id/rvFrontierMusic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSaversMusic"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_song"
+            app:layout_constraintTop_toBottomOf="@id/title_savers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <!-- Xross -->
+        <TextView
+            android:id="@+id/title_xros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/text_black_color"
+            android:text="@string/xros"
+            app:layout_constraintTop_toBottomOf="@id/rvSaversMusic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvXrosMusic"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_song"
+            app:layout_constraintTop_toBottomOf="@id/title_xros"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <!-- Hunters -->
+        <TextView
+            android:id="@+id/title_hunters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/text_black_color"
+            android:text="@string/hunters"
+            app:layout_constraintTop_toBottomOf="@id/rvXrosMusic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHuntersMusic"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_song"
+            app:layout_constraintTop_toBottomOf="@id/title_hunters"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

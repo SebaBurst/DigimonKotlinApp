@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/page_home"
+    android:id="@+id/nav">
+
+    <fragment
+        android:id="@+id/page_home"
+        android:name="com.example.digiapp.ui.home.HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_page_home_to_page_quiz"
+            app:destination="@id/page_quiz"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_page_home_to_page_music"
+            app:destination="@id/page_music"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/page_quiz"
+        android:name="com.example.digiapp.ui.quiz.QuizFragment"
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_page_quiz_to_page_music"
+            app:destination="@id/page_music"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_page_quiz_to_page_home"
+            app:destination="@id/page_home"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/page_music"
+        android:name="com.example.digiapp.ui.music.MusicFragment"
+        tools:layout="@layout/fragment_music" >
+        <action
+            android:id="@+id/action_page_music_to_page_home"
+            app:destination="@id/page_home"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_page_music_to_page_quiz"
+            app:destination="@id/page_quiz"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+</navigation>

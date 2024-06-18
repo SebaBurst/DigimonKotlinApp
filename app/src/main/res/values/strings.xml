@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">digiapp</string>
+    <string name="digimon_name">Gammamon</string>
+    <string name="digimonInfoImage">this is a digimon image</string>
+    <string name="digimonInfoDescription">DigiDescripción</string>
+    <string name="digimonText">Este Digimon tiene la costumbre de masticarlo todo. Aunque traviesas, las órdenes de Hiro y los demás nunca caen en oídos sordos. Este Digimon también es un gran fanático del chocolate, incluso refiriéndose a él como su campeón.</string>
+    <string name="digipartnerTitle">Compañero</string>
+    <string name="partnerName">Hiro Amanokawa</string>
+    <string name="digievolutions">Digievoluciones</string>
+    <string name="champion">Campeón</string>
+    <string name="perfect">Perfecto</string>
+    <string name="ultimate">Definitivo</string>
+    <string name="Armor">Armadura</string>
+    <string name="burst">Burst</string>
+    <string name="jogress">Jogress</string>
+    <string name="digimonEvolveName">GulusGammamon</string>
+    <string name="partnerName2">Taichi Yagami</string>
+    <string name="taichiDescription">Taichi, el aventurero líder del grupo, siempre es el primero en entrar en acción, aunque a menudo eso lo pone en peligro. Pronto se dio cuenta de que, para ser un verdadero líder, debía confiar en los demás y utilizar la empatía en lugar del coraje imprudentemente.</string>
+    <string name="digimonPartnerTitleText">Compañero Digimon</string>
+    <string name="welcome">Bienvenido al Digimundo</string>
+    <string name="selectSeries">Selecciona una serie</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Inicio</string>
+    <string name="music">Musica</string>
+    <string name="Games">Quiz</string>
+    <string name="adventure">Digimon Adventure</string>
+    <string name="adventure02">Digimon Adventure 02</string>
+    <string name="tamers">Digimon Tamers</string>
+    <string name="frontier">Digimon Frontier</string>
+    <string name="savers">Digimon Savers</string>
+    <string name="xros">Digimon Xros Wars</string>
+    <string name="hunters">Digimon Hunters</string>
+    <string name="time">00:00</string>
+    <string name="recommendation">Más Canciones de </string>
+
+
+</resources>

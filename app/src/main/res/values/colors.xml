@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="digi_info_bg">#FE727D</color>
+    <color name="text_black_color">#4B4B4B</color>
+    <color name="evolve_card_bg">#545454</color>
+    <color name="evolve_level_card_bg">#D8D8D8</color>
+    <color name="partner_bg">#ECA259</color>
+    <color name="series_bg">#88B0FF</color>
+    <color name="transparent">#00000000</color>
+    <color name="semi_white">#D5D5D5</color>
+    <color name="semi_black">#2C2C2C</color>
+    <color name="transparent_black">#601B1A1A</color>
+</resources>
