@@ -1,14 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".ui.quiz.QuizFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-</FrameLayout>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/quiz_layoutQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/counterQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:text="@string/countQuestion"
+                android:textSize="18sp"
+                android:textColor="@color/text_black_color"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:text="@string/question"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/text_black_color"
+                android:layout_marginTop="16dp"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/quiz_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/option1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="15dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="@color/evolve_level_card_bg"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:id="@+id/option1_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/answer1"
+                        android:textColor="@color/text_black_color"
+                        android:padding="16dp"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/option2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="15dp"
+                    android:layout_marginBottom="10dp"
+
+                    app:cardBackgroundColor="@color/evolve_level_card_bg"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:id="@+id/option2_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/answer1"
+                        android:textColor="@color/text_black_color"
+                        android:padding="16dp"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/option3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="15dp"
+                    android:layout_marginBottom="10dp"
+
+                    app:cardBackgroundColor="@color/evolve_level_card_bg"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:id="@+id/option3_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/answer1"
+                        android:textColor="@color/text_black_color"
+                        android:padding="16dp"/>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/option4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="15dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="@color/evolve_level_card_bg"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:id="@+id/option4_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/answer1"
+                        android:textColor="@color/text_black_color"
+                        android:padding="16dp"/>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/next_quiz_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/digimon_bg"
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:text="@string/nextQuestion"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textAlignment="center"/>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/restart_quiz_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/digi_info_bg"
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:text="@string/restart"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textAlignment="center"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+        <!-- Question  Initial Scene-->
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/quiz_layoutStart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:id="@+id/quiz_image"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:contentDescription="@string/digimonInfoImage"
+                android:src="@drawable/quizart"
+                android:layout_marginTop="30dp"/>
+
+            <TextView
+                android:id="@+id/question_title"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:layout_height="wrap_content"
+                android:text="@string/digimon_digitalquiz"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="@color/text_black_color"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/question_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:textColor="@color/text_black_color"
+                android:layout_marginTop="10dp"
+                android:text="@string/digimon_digitalquiz_desc"
+
+                />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/start_quiz_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/digimon_bg"
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:text="@string/start_quiz"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textAlignment="center"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

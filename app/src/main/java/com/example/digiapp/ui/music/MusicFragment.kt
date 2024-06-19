@@ -60,7 +60,9 @@ class MusicFragment : Fragment() {
                                    binding.rvFrontierMusic,
                                    binding.rvSaversMusic,
                                    binding.rvXrosMusic,
-                                   binding.rvHuntersMusic)
+                                   binding.rvHuntersMusic,
+                                   binding.rvAppmonMusic,
+                                   binding.rvAd2020Music)
 
         //initialize the recycler view adapters with empty list of songs
         adapters = List(recyclerViews.size) { index ->
@@ -75,7 +77,7 @@ class MusicFragment : Fragment() {
         }
 
         //get the songs for each series
-        (0..6).forEach{seriesId ->
+        (0..8).forEach{seriesId ->
             getSongs(seriesId, adapters[seriesId])
         }
 

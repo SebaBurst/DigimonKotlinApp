@@ -243,6 +243,8 @@ class PlayerActivity : AppCompatActivity() {
             4 -> title += " " + getString(R.string.savers)
             5 -> title += " " + getString(R.string.xros)
             6 -> title += " " + getString(R.string.hunters)
+            7 -> title += " " + getString(R.string.appmon)
+            8 -> title += " " + getString(R.string.adventure2020)
         }
         binding.titleRecommendation.text = title
     }
