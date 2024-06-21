@@ -1,6 +1,5 @@
 package com.example.digiapp.services
 
-import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Intent
 import android.media.AudioAttributes
@@ -9,12 +8,13 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
-import androidx.core.app.NotificationCompat
-import com.example.digiapp.R
 
 class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
 
 
+    /**
+     * Variables
+     */
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var audioManager: AudioManager
     private lateinit var audioFocusRequest: AudioFocusRequest
@@ -23,6 +23,10 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
     private val binder = MusicBinder()
     private var isStarted = false
 
+    /**
+     * onCreate
+     * Initialize the MediaPlayer and AudioManager
+     */
     override fun onCreate() {
         super.onCreate()
         mediaPlayer = MediaPlayer()

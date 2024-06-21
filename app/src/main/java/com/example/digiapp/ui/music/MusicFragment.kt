@@ -6,12 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.digiapp.data.models.song.SongResult
 import com.example.digiapp.data.networks.ApiService
 import com.example.digiapp.data.networks.RetrofitClient
+import com.example.digiapp.data.repositories.SongRepository
 import com.example.digiapp.databinding.FragmentMusicBinding
 import com.example.digiapp.ui.music.adapters.SongAdapter
+import com.example.digiapp.ui.music.viewmodels.MusicViewModel
+import com.example.digiapp.ui.music.viewmodels.MusicViewModelFactory
 import com.example.digiapp.ui.player.PlayerActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +28,10 @@ class MusicFragment : Fragment() {
 
     private lateinit var binding: FragmentMusicBinding // view binding
     private lateinit var adapters: List<SongAdapter> //list of recycler view adapters
-    private lateinit var songs: SongResult //list of songs
+    private val viewModel: MusicViewModel by viewModels {
+        MusicViewModelFactory( SongRepository(RetrofitClient().getRetrofit().create(ApiService::class.java)))
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +50,8 @@ class MusicFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
+        viewModel.fetchSongs()
+        setupObservers()
     }
 
     private fun initUI(){
@@ -56,7 +66,6 @@ class MusicFragment : Fragment() {
      */
     private fun initRecyclerViews(){
         //initialize the recycler view
-
         //initialize the recycler view adapters and create a list of recycler views
         val recyclerViews = listOf(binding.rvAdventureMusic,
                                    binding.rvAdventureTwoMusic,
@@ -69,29 +78,36 @@ class MusicFragment : Fragment() {
                                    binding.rvAd2020Music,
                                    binding.rvGhostMusic
             )
-
         //initialize the recycler view adapters with empty list of songs
         adapters = List(recyclerViews.size) { index ->
             SongAdapter(listOf(), false) { position -> onItemSelected(index, position) }
         }
-
         //initialize the recycler view adapters and layout manager for each recycler view
         recyclerViews.forEachIndexed { index, recyclerView ->
             recyclerView.adapter = adapters[index]
             recyclerView.layoutManager = LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false)
         }
+    }
 
-        //get the songs
-        getSongs()
+    private fun setupObservers() {
+        viewModel.songs.observe(viewLifecycleOwner, Observer { songs ->
+            adapters.forEachIndexed { index, adapter ->
+                adapter.updateSongs(songs.filter { it.seriesid == index })
+            }
+            binding.loadingMusic.visibility = View.GONE
+            binding.loadingBG.visibility = View.GONE
+        })
 
-        //get the songs for each series
-       /** (0..8).forEach{seriesId ->
-            getSongs(seriesId, adapters[seriesId])
-            //val adapter = adapters[seriesId]
-            //adapter.updateSongs(songs.filter { it.seriesid == seriesId})
-        }**/
-
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) {
+                binding.loadingMusic.visibility = View.VISIBLE
+                binding.loadingBG.visibility = View.VISIBLE
+            } else {
+                binding.loadingMusic.visibility = View.GONE
+                binding.loadingBG.visibility = View.GONE
+            }
+        })
     }
 
 
@@ -110,31 +126,6 @@ class MusicFragment : Fragment() {
         }
         startActivity(intent)
     }
-
-
-    /**
-     * Get the songs for the series with id [serieId]
-     * @param serieId the id of the series
-     * @param songAdapter the adapter to update with the songs
-     * @return Unit
-     */
-    private fun getSongs() {
-        val apiService = RetrofitClient().getRetrofit()
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = apiService.create(ApiService::class.java).getSongs()
-            if (response.isNotEmpty()) {
-                songs = response
-                withContext(Dispatchers.Main) {
-                    adapters.forEachIndexed { index, adapter ->
-                        adapter.updateSongs(songs.filter { it.seriesid == index })
-                        binding.loadingMusic.visibility = View.GONE
-                        binding.loadingBG.visibility = View.GONE
-                    }
-                }
-            }
-        }
-    }
-
 
 
     companion object{

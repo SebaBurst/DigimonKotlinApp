@@ -27,6 +27,12 @@ import com.example.digiapp.R
 import com.example.digiapp.databinding.ActivityPrincipalBinding
 import com.example.digiapp.services.MusicService
 import com.example.digiapp.ui.home.HomeFragment
+import com.example.digiapp.ui.music.MusicFragment.Companion.authorTag
+import com.example.digiapp.ui.music.MusicFragment.Companion.fromPlayer
+import com.example.digiapp.ui.music.MusicFragment.Companion.idSeries
+import com.example.digiapp.ui.music.MusicFragment.Companion.imageTag
+import com.example.digiapp.ui.music.MusicFragment.Companion.songTag
+import com.example.digiapp.ui.player.PlayerActivity
 import com.example.digiapp.util.Util
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -38,6 +44,7 @@ class PrincipalActivity : AppCompatActivity() {
     private lateinit var miniPlayerImage: String
     private lateinit var miniPlayerTitle: String
     private lateinit var miniPlayerAuthor: String
+    private lateinit var miniPlayerId: String
     private lateinit var musicService: MusicService
     private var serviceBound = false
     private var isPlaying = false
@@ -94,6 +101,21 @@ class PrincipalActivity : AppCompatActivity() {
                 binding.ivMiniPlay.setImageResource(R.drawable.ic_pause)
 
             }
+
+        }
+
+
+        binding.miniPlayer.setOnClickListener {
+            val intent = Intent(this, PlayerActivity::class.java).apply {
+                putExtra(imageTag, miniPlayerImage)
+                putExtra(songTag, miniPlayerTitle)
+                putExtra(authorTag, miniPlayerAuthor)
+                putExtra(fromPlayer, false)
+                putExtra(idSeries, miniPlayerId)
+            }
+            startActivity(intent)
+            overridePendingTransition(R.anim.slider_up, R.anim.slide_down)
+
 
         }
     }
@@ -197,6 +219,7 @@ class PrincipalActivity : AppCompatActivity() {
         miniPlayerTitle = intent.extras?.getString(MINI_PLAYER_TITLE) ?: ""
         miniPlayerAuthor = intent.extras?.getString(MINI_PLAYER_AUTHOR) ?: ""
         isMiniPlayerVisible = intent.extras?.getBoolean(IS_MINI_PLAYER_VISIBLE, false) ?: false
+        miniPlayerId = intent.extras?.getString(SERIE_ID) ?: ""
     }
 
 
@@ -213,6 +236,7 @@ class PrincipalActivity : AppCompatActivity() {
         const val MINI_PLAYER_TITLE = "miniPlayerTitle"
         const val MINI_PLAYER_AUTHOR = "miniPlayerAuthor"
         const val IS_MINI_PLAYER_VISIBLE = "isMiniPlayerVisible"
+        const val SERIE_ID = "serieId"
     }
 
 

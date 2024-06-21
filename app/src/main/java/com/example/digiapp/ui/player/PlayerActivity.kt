@@ -42,6 +42,7 @@ import com.example.digiapp.ui.principal.PrincipalActivity.Companion.IS_MINI_PLAY
 import com.example.digiapp.ui.principal.PrincipalActivity.Companion.MINI_PLAYER_AUTHOR
 import com.example.digiapp.ui.principal.PrincipalActivity.Companion.MINI_PLAYER_IMAGE
 import com.example.digiapp.ui.principal.PrincipalActivity.Companion.MINI_PLAYER_TITLE
+import com.example.digiapp.ui.principal.PrincipalActivity.Companion.SERIE_ID
 import com.example.digiapp.util.Util.convertTime
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -95,25 +96,35 @@ class PlayerActivity : AppCompatActivity() {
             val binder = service as MusicService.MusicBinder
             musicService = binder.getService()
             serviceBound = true
-            binding.sliderTrack.max = 0
-            binding.sliderTrack.progress = 0
-            binding.tvCurrentTime.text = convertTime(0)
-            binding.tvTotalTime.text = convertTime(0)
 
-            if (isPlayer) {
-                println("se esta reproduciendo")
-                musicService.stopMusic()
-                isPlaying = false
+            if(!isPlayer){
+                binding.sliderTrack.max = musicService.getMusicDuration()
+                binding.tvTotalTime.text = convertTime(musicService.getMusicDuration())
+                isPlaying = true
+                binding.btnPlay.isEnabled = true
+                binding.btnPlay.setImageResource(R.drawable.pause)
             }
-            musicService.stopMusic()
+            else {
+                binding.sliderTrack.max = 0
+                binding.sliderTrack.progress = 0
+                binding.tvCurrentTime.text = convertTime(0)
+                binding.tvTotalTime.text = convertTime(0)
 
-            // Preparar la canción sin reproducirla
-            musicService.prepareSong(songFile) {
-                runOnUiThread {
-                    // Habilitar el botón de reproducción y actualizar el tiempo total
-                    binding.btnPlay.isEnabled = true
-                    binding.sliderTrack.max = musicService.getMusicDuration()
-                    binding.tvTotalTime.text = convertTime(musicService.getMusicDuration())
+                if (isPlayer) {
+                    println("se esta reproduciendo")
+                    musicService.stopMusic()
+                    isPlaying = false
+                }
+                musicService.stopMusic()
+
+                // Preparar la canción sin reproducirla
+                musicService.prepareSong(songFile) {
+                    runOnUiThread {
+                        // Habilitar el botón de reproducción y actualizar el tiempo total
+                        binding.btnPlay.isEnabled = true
+                        binding.sliderTrack.max = musicService.getMusicDuration()
+                        binding.tvTotalTime.text = convertTime(musicService.getMusicDuration())
+                    }
                 }
             }
         }
@@ -289,10 +300,10 @@ class PlayerActivity : AppCompatActivity() {
                 putExtra(MINI_PLAYER_IMAGE, imageCover)
                 putExtra(MINI_PLAYER_TITLE, songName)
                 putExtra(MINI_PLAYER_AUTHOR, songAuthor)
+                putExtra(SERIE_ID, seriesId)
             }
         }
         startActivity(intent)
-        // Aplica la transición personalizada
     }
 
 

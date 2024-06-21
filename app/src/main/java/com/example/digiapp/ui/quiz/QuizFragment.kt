@@ -7,13 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import androidx.fragment.app.viewModels
 import com.example.digiapp.R
 import com.example.digiapp.data.models.quiz.Answer
 import com.example.digiapp.data.models.quiz.QuestionResult
 import com.example.digiapp.data.models.quiz.QuestionResultItem
 import com.example.digiapp.data.networks.ApiService
 import com.example.digiapp.data.networks.RetrofitClient
+import com.example.digiapp.data.repositories.QuestionsRepository
 import com.example.digiapp.databinding.FragmentQuizBinding
+import com.example.digiapp.ui.quiz.viewmodels.QuestionViewModel
+import com.example.digiapp.ui.quiz.viewmodels.QuestionViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,8 +29,14 @@ class QuizFragment : Fragment() {
     private var currentQuestionIndex = 0
     private var answerSelected = -1
     private lateinit var questions: QuestionResult
-    private var endgame = false
     private var correctAnswers = -1
+    private val viewModel : QuestionViewModel by viewModels {
+        QuestionViewModelFactory(
+            QuestionsRepository(
+                RetrofitClient().getRetrofit().create(ApiService::class.java)
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +54,10 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
+        viewModel.fetchQuestions()
+        setupObservers()
         initListeners()
-        getQuestions()
+        //getQuestions()
     }
 
     private fun initUI() {
@@ -73,7 +85,7 @@ class QuizFragment : Fragment() {
         binding.startQuizButton.setOnClickListener {
             binding.quizLayoutStart.visibility = View.GONE
             binding.quizLayoutQuestion.visibility = View.VISIBLE
-            loadQuestion() // Load the first question when starting the quiz
+            viewModel.fetchQuestions()
         }
         binding.nextQuizButton.setOnClickListener {
             nextQuestion()
@@ -268,16 +280,10 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun getQuestions() {
-        val apiService = RetrofitClient().getRetrofit()
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = apiService.create(ApiService::class.java).getQuestions()
-            if (response.isNotEmpty()) {
-                questions = response
-                withContext(Dispatchers.Main) {
-                    loadQuestion() // Load the first question on the main thread
-                }
-            }
+    private fun setupObservers() {
+        viewModel.questions.observe(viewLifecycleOwner) { questions ->
+            this.questions = questions as QuestionResult
+            loadQuestion()
         }
     }
 }
