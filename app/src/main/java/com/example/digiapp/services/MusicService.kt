@@ -119,12 +119,6 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
         }
     }
 
-    fun resumeMusic() {
-        if (!mediaPlayer.isPlaying) {
-            mediaPlayer.start()
-            isPlaying = true
-        }
-    }
 
      fun stopMusic() {
              if (mediaPlayer.isPlaying || isPlaying || isStarted) {

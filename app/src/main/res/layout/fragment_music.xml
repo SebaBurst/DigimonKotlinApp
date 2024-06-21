@@ -6,10 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.music.MusicFragment">
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp">
+
+
+
+
+
 
         <!-- Adventure -->
         <TextView
@@ -278,6 +285,74 @@
             app:layout_constraintTop_toBottomOf="@id/title_adventure2020"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+        <!-- Ghost Game -->
+        <TextView
+            android:id="@+id/title_ghost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/text_black_color"
+            android:text="@string/ghost"
+            app:layout_constraintTop_toBottomOf="@id/rvAd2020Music"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGhostMusic"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_song"
+            app:layout_constraintTop_toBottomOf="@id/title_ghost"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/loadingBG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:backgroundTint="@color/white" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/loadingMusic"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:backgroundTint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/title_frontier"
+            >
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gifLoadingShoutmon"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/shoutmon" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
