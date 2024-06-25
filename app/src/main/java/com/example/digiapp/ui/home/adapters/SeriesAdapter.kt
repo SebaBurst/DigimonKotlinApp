@@ -1,15 +1,13 @@
 package com.example.digiapp.ui.home.adapters
 
-import SeriesViewHolder
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.digiapp.R
-import com.example.digiapp.data.models.SeriesItemResultItem
+import com.example.digiapp.data.models.serie.SeriesItemResultItem
 
-class SeriesAdapter (private var series: List<SeriesItemResultItem>):
+class SeriesAdapter (private var series: List<SeriesItemResultItem> , private val onItemSelect: (Int) -> Unit):
     RecyclerView.Adapter<SeriesViewHolder>() {
 
     //create the view holder
@@ -24,14 +22,18 @@ class SeriesAdapter (private var series: List<SeriesItemResultItem>):
 
     override fun onBindViewHolder(holder: SeriesViewHolder, position: Int) {
         holder.bind(series[position])
+        holder.itemView.setOnClickListener {
+            onItemSelect(position)
+        }
 
     }
-
-
     @SuppressLint("NotifyDataSetChanged")
     fun updateData(series: List<SeriesItemResultItem>){
         this.series = series
         notifyDataSetChanged()
     }
+
+
+    fun getSeries(position: Int) = series[position]
 
 }

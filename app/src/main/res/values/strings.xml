@@ -44,7 +44,7 @@
     <string name="digimon_digitalquiz">Digimon: DigitalQuiz</string>
     <string name="digimon_digitalquiz_desc">¡Estas preparado para poner tus conocimientos a prueba con el reto de las 50 preguntas!</string>
     <string name="start_quiz">Comenzar Quiz</string>
-    <string name ="question">¿Cual digimon dice la siguiente Frase? ¡¿Porque yo no puedo Digievolucionar?!</string>
+    <string name="question">¿Cual digimon dice la siguiente Frase? ¡¿Porque yo no puedo Digievolucionar?!</string>
     <string name="answer1">Agumon</string>
     <string name="answer2">Gabumon</string>
     <string name="answer3">Patamon</string>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:interpolator="@android:anim/accelerate_interpolator">
+    android:interpolator="@android:interpolator/accelerate_decelerate">
 
 <translate
         android:fromYDelta="0%"
-        android:toYDelta="100%"
-        android:duration="300" /> <!-- Duración de la animación en milisegundos -->
+        android:toYDelta="70%"
+        android:duration="500" /> <!-- Duración de la animación en milisegundos -->
 </set>

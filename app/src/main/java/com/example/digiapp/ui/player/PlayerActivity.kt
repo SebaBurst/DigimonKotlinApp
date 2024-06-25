@@ -6,27 +6,19 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.SeekBar
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
-import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.digiapp.R
-import com.example.digiapp.data.networks.ApiService
-import com.example.digiapp.data.networks.RetrofitClient
 import com.example.digiapp.databinding.ActivityPlayerBinding
 import com.example.digiapp.services.MusicService
 import com.example.digiapp.ui.music.MusicFragment.Companion.authorTag
@@ -37,6 +29,7 @@ import com.example.digiapp.ui.music.MusicFragment.Companion.idTag
 import com.example.digiapp.ui.music.MusicFragment.Companion.imageTag
 import com.example.digiapp.ui.music.MusicFragment.Companion.songTag
 import com.example.digiapp.ui.music.adapters.SongAdapter
+import com.example.digiapp.ui.music.viewmodels.MusicViewModel
 import com.example.digiapp.ui.principal.PrincipalActivity
 import com.example.digiapp.ui.principal.PrincipalActivity.Companion.IS_MINI_PLAYER_VISIBLE
 import com.example.digiapp.ui.principal.PrincipalActivity.Companion.MINI_PLAYER_AUTHOR
@@ -46,12 +39,10 @@ import com.example.digiapp.ui.principal.PrincipalActivity.Companion.SERIE_ID
 import com.example.digiapp.util.Util.convertTime
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.properties.Delegates
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
@@ -60,19 +51,21 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var songName: String
     private lateinit var songAuthor: String
     private lateinit var songFile: String
-    private var isPlayer:Boolean = true
+    private var isPlayer: Boolean = true
     private var seriesId: Int = 0
     private var idSong: Int = 0
     private lateinit var musicService: MusicService
     private var serviceBound = false
     private var isPlaying = false
 
+    private val viewModel: MusicViewModel by viewModels ()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        viewModel.fetchSongs()
         // Obtener detalles de la canción desde el intent
         getSongDetails()
 
@@ -97,14 +90,13 @@ class PlayerActivity : AppCompatActivity() {
             musicService = binder.getService()
             serviceBound = true
 
-            if(!isPlayer){
+            if (!isPlayer) {
                 binding.sliderTrack.max = musicService.getMusicDuration()
                 binding.tvTotalTime.text = convertTime(musicService.getMusicDuration())
                 isPlaying = true
                 binding.btnPlay.isEnabled = true
                 binding.btnPlay.setImageResource(R.drawable.pause)
-            }
-            else {
+            } else {
                 binding.sliderTrack.max = 0
                 binding.sliderTrack.progress = 0
                 binding.tvCurrentTime.text = convertTime(0)
@@ -133,6 +125,7 @@ class PlayerActivity : AppCompatActivity() {
             serviceBound = false
         }
     }
+
     private fun initUI() {
         initSongDetails()
         initRecommendation()
@@ -210,8 +203,10 @@ class PlayerActivity : AppCompatActivity() {
             override fun onSuccess() {
                 initBackgroundColor()
             }
+
             override fun onError(e: Exception?) {
-                Toast.makeText(this@PlayerActivity, "Error loading song cover", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@PlayerActivity, "Error loading song cover", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }
@@ -225,8 +220,10 @@ class PlayerActivity : AppCompatActivity() {
     private fun getDominantGradient(image: Drawable): GradientDrawable {
         val imageCover = image.toBitmap()
         val palette = Palette.from(imageCover).generate()
-        val darkVibrantColor = palette.getDarkVibrantColor(ContextCompat.getColor(this, R.color.semi_black))
-        val mutatecolor = palette.getDarkMutedColor(ContextCompat.getColor(this, R.color.semi_black))
+        val darkVibrantColor =
+            palette.getDarkVibrantColor(ContextCompat.getColor(this, R.color.semi_black))
+        val mutatecolor =
+            palette.getDarkMutedColor(ContextCompat.getColor(this, R.color.semi_black))
         val darkBackgroundColor = darkVibrantColor
         window.statusBarColor = mutatecolor
         return GradientDrawable(
@@ -262,16 +259,10 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun getRecommendations() {
-        val apiService = RetrofitClient().getRetrofit()
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = apiService.create(ApiService::class.java).getSongs()
-            if (response.isNotEmpty()) {
-                val filterResponseSeries = response.filter { it.seriesid == seriesId }
-                val filterResponse = filterResponseSeries.filter { it.id != idSong }
-                withContext(Dispatchers.Main) {
-                    adapter.updateSongs(filterResponse)
-                }
-            }
+        viewModel.songs.observe(this) { songs ->
+            val filterResponseSeries = songs.filter { it.seriesid == seriesId }
+            val filterResponse = filterResponseSeries.filter { it.id != idSong }
+            adapter.updateSongs(filterResponse)
         }
     }
 
@@ -289,13 +280,12 @@ class PlayerActivity : AppCompatActivity() {
     }
 
 
-
     override fun finish() {
         super.finish()
         //go to principal activity
 
         val intent = Intent(this, PrincipalActivity::class.java).apply {
-            if(isPlaying){
+            if (isPlaying) {
                 putExtra(IS_MINI_PLAYER_VISIBLE, true)
                 putExtra(MINI_PLAYER_IMAGE, imageCover)
                 putExtra(MINI_PLAYER_TITLE, songName)
@@ -303,9 +293,15 @@ class PlayerActivity : AppCompatActivity() {
                 putExtra(SERIE_ID, seriesId)
             }
         }
+
         startActivity(intent)
+        if (isPlaying) {
+            overridePendingTransition(0,R.anim.slide_down)
+        }
+
     }
-
-
-
 }
+
+
+
+

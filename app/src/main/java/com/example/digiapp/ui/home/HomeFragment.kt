@@ -1,5 +1,6 @@
 package com.example.digiapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,20 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.digiapp.R
-import com.example.digiapp.data.networks.ApiService
-import com.example.digiapp.data.networks.RetrofitClient
-import com.example.digiapp.data.repositories.SeriesRepository
 import com.example.digiapp.databinding.FragmentHomeBinding
 import com.example.digiapp.ui.home.adapters.SeriesAdapter
 import com.example.digiapp.ui.home.viewmodels.SeriesViewModel
-import com.example.digiapp.ui.home.viewmodels.SeriesViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.digiapp.ui.serie.SeriesInfoActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     //add view binding here
@@ -28,13 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding //initialize the binding
     private lateinit var seriesAdapter: SeriesAdapter //initialize the series adapter
 
-    private val viewModel : SeriesViewModel by viewModels {
-        SeriesViewModelFactory(
-            SeriesRepository(
-                RetrofitClient().getRetrofit().create(ApiService::class.java)
-            )
-        )
-    }
+    private val viewModel : SeriesViewModel by viewModels()
 
 
     /**
@@ -82,7 +70,7 @@ class HomeFragment : Fragment() {
      */
 
     private fun initRecyclerViews(){
-        seriesAdapter = SeriesAdapter(listOf()) //initialize the series adapter
+        seriesAdapter = SeriesAdapter(listOf()) {position -> onItemSelected(position)} //initialize the series adapter
         val layoutManager =
             LinearLayoutManager(
                 requireContext(),
@@ -90,6 +78,21 @@ class HomeFragment : Fragment() {
             )
         binding.recyclerViewSeries.layoutManager = layoutManager
         binding.recyclerViewSeries.adapter = seriesAdapter
+    }
+
+    /**
+     * This function will be called when an item is selected and go to SeriesInfoActivity
+     * @param position
+     */
+    private fun onItemSelected(position: Int) {
+        val series = seriesAdapter.getSeries(position)
+        val intent = Intent(requireContext(), SeriesInfoActivity::class.java).apply {
+            putExtra("series", series.seriesname)
+            putExtra("seriesId", series.id)
+            putExtra("seriesImage", series.logo)
+            putExtra("seriesDescription", series.sinopsis)
+        }
+        startActivity(intent)
     }
 
 
@@ -101,8 +104,7 @@ class HomeFragment : Fragment() {
         viewModel.series.observe(viewLifecycleOwner) {
             seriesAdapter.updateData(it)
         }
-
-        viewModel.isLoadiing.observe(viewLifecycleOwner){
+        viewModel.isLoading.observe(viewLifecycleOwner){
             if(it){
                 binding.gifLoadingDigitama.visibility = View.VISIBLE
                 binding.recyclerViewSeries.visibility = View.GONE

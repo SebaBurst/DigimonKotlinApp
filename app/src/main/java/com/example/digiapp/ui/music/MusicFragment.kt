@@ -9,28 +9,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.digiapp.data.models.song.SongResult
-import com.example.digiapp.data.networks.ApiService
-import com.example.digiapp.data.networks.RetrofitClient
-import com.example.digiapp.data.repositories.SongRepository
 import com.example.digiapp.databinding.FragmentMusicBinding
 import com.example.digiapp.ui.music.adapters.SongAdapter
 import com.example.digiapp.ui.music.viewmodels.MusicViewModel
-import com.example.digiapp.ui.music.viewmodels.MusicViewModelFactory
 import com.example.digiapp.ui.player.PlayerActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MusicFragment : Fragment() {
 
     private lateinit var binding: FragmentMusicBinding // view binding
     private lateinit var adapters: List<SongAdapter> //list of recycler view adapters
-    private val viewModel: MusicViewModel by viewModels {
-        MusicViewModelFactory( SongRepository(RetrofitClient().getRetrofit().create(ApiService::class.java)))
-    }
+    private val viewModel: MusicViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

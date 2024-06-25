@@ -9,20 +9,13 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.viewModels
 import com.example.digiapp.R
-import com.example.digiapp.data.models.quiz.Answer
 import com.example.digiapp.data.models.quiz.QuestionResult
-import com.example.digiapp.data.models.quiz.QuestionResultItem
-import com.example.digiapp.data.networks.ApiService
-import com.example.digiapp.data.networks.RetrofitClient
-import com.example.digiapp.data.repositories.QuestionsRepository
 import com.example.digiapp.databinding.FragmentQuizBinding
 import com.example.digiapp.ui.quiz.viewmodels.QuestionViewModel
-import com.example.digiapp.ui.quiz.viewmodels.QuestionViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class QuizFragment : Fragment() {
 
     private lateinit var binding: FragmentQuizBinding
@@ -30,13 +23,8 @@ class QuizFragment : Fragment() {
     private var answerSelected = -1
     private lateinit var questions: QuestionResult
     private var correctAnswers = -1
-    private val viewModel : QuestionViewModel by viewModels {
-        QuestionViewModelFactory(
-            QuestionsRepository(
-                RetrofitClient().getRetrofit().create(ApiService::class.java)
-            )
-        )
-    }
+    private val viewModel : QuestionViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +45,6 @@ class QuizFragment : Fragment() {
         viewModel.fetchQuestions()
         setupObservers()
         initListeners()
-        //getQuestions()
     }
 
     private fun initUI() {

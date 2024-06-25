@@ -1,7 +1,6 @@
 package com.example.digiapp.data.networks
 
-import com.example.digiapp.data.models.SeriesItemResult
-import com.example.digiapp.data.models.SeriesItemResultItem
+import com.example.digiapp.data.models.serie.SeriesItemResult
 import com.example.digiapp.data.models.quiz.QuestionResult
 import com.example.digiapp.data.models.song.SongResult
 import retrofit2.http.GET

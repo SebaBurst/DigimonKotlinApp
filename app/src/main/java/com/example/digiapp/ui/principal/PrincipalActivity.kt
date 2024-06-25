@@ -36,7 +36,9 @@ import com.example.digiapp.ui.player.PlayerActivity
 import com.example.digiapp.util.Util
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PrincipalActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPrincipalBinding
@@ -44,7 +46,7 @@ class PrincipalActivity : AppCompatActivity() {
     private lateinit var miniPlayerImage: String
     private lateinit var miniPlayerTitle: String
     private lateinit var miniPlayerAuthor: String
-    private lateinit var miniPlayerId: String
+    private var miniPlayerId: Int =-1
     private lateinit var musicService: MusicService
     private var serviceBound = false
     private var isPlaying = false
@@ -219,7 +221,7 @@ class PrincipalActivity : AppCompatActivity() {
         miniPlayerTitle = intent.extras?.getString(MINI_PLAYER_TITLE) ?: ""
         miniPlayerAuthor = intent.extras?.getString(MINI_PLAYER_AUTHOR) ?: ""
         isMiniPlayerVisible = intent.extras?.getBoolean(IS_MINI_PLAYER_VISIBLE, false) ?: false
-        miniPlayerId = intent.extras?.getString(SERIE_ID) ?: ""
+        miniPlayerId = intent.extras?.getInt(SERIE_ID) ?: -1
     }
 
 

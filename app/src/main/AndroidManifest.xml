@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,24 +17,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Digiapp"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.serie.SeriesInfoActivity"
+            android:exported="false" />
 
         <service
             android:name=".services.MusicService"
             android:enabled="true"
-            android:exported="true"
-            />
+            android:exported="true" />
+
         <activity
             android:name=".ui.player.PlayerActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.Digiapp"
-
-
-            />
+            android:theme="@style/Base.Theme.Digiapp" />
         <activity
             android:name=".ui.principal.PrincipalActivity"
-            android:exported="true"
             android:configChanges="orientation|screenSize|keyboardHidden"
-        >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,8 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.digimon.DigimonInfoActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
