@@ -91,6 +91,7 @@ class HomeFragment : Fragment() {
             putExtra("seriesId", series.id)
             putExtra("seriesImage", series.logo)
             putExtra("seriesDescription", series.sinopsis)
+            putExtra("seriesBanner", series.banner)
         }
         startActivity(intent)
     }

@@ -14,55 +14,105 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/seriesInfoName"
             android:layout_width="0dp"
-            android:layout_height="280dp"
-            android:background="@color/digimon_bg"
+            android:layout_height="230dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="270dp"
-                android:background="@drawable/bginfo"
-                android:backgroundTint="@color/white">
                 <ImageView
                     android:id="@+id/seriesImageLogo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="35dp"
-                    android:contentDescription="@string/digimonInfoImage"
-                    android:src="@drawable/serieslogo"/>
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/taichireboot"
+                    android:contentDescription="@string/digimonInfoImage"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <TextView
             android:id="@+id/seriesSinopsisTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/digimonInfoDescription"
+            android:text="@string/sinopsisTitle"
             android:textColor="@color/text_black_color"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginTop="15dp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/seriesInfoName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-            android:id="@+id/seriesSinopsis"
-            android:layout_width="match_parent"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/seriesSinopsisCard"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/evolve_level_card_bg"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="@string/digimonText"
-            android:textStyle="normal"
-            android:textSize="18sp"
-            android:textAlignment="center"
-            android:textColor="@color/text_black_color"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintTop_toBottomOf="@id/seriesSinopsisTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+            <TextView
+                android:id="@+id/seriesSinopsis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/digimonText"
+                android:textStyle="normal"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:textColor="@color/text_black_color"
+                />
+
+
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tamersTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TamersTitle"
+            android:textColor="@color/text_black_color"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/seriesSinopsisCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tamersRecyclerView"
+            tools:listitem="@layout/item_tamer"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintTop_toBottomOf="@id/tamersTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/digimonstitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Digimon"
+            app:layout_constraintTop_toBottomOf="@id/tamersRecyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/text_black_color"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"/>
+
 
 
 

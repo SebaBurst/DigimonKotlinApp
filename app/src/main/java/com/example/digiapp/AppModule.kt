@@ -5,6 +5,7 @@ import com.example.digiapp.data.networks.RetrofitClient
 import com.example.digiapp.data.repositories.QuestionsRepository
 import com.example.digiapp.data.repositories.SeriesRepository
 import com.example.digiapp.data.repositories.SongRepository
+import com.example.digiapp.data.repositories.TamersRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,5 +45,11 @@ object AppModule {
     @Singleton
     fun provideSongsRepository(apiService: ApiService): SongRepository {
         return SongRepository(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTamersRepository(apiService: ApiService): TamersRepository {
+        return TamersRepository(apiService)
     }
 }

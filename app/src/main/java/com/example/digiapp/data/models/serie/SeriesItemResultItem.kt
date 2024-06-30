@@ -5,5 +5,6 @@ data class SeriesItemResultItem(
     val id: Int,
     val logo: String,
     val seriesname: String,
-    val sinopsis: String
+    val sinopsis: String,
+    val banner : String
 )

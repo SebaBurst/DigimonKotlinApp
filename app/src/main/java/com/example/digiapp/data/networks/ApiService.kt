@@ -3,6 +3,7 @@ package com.example.digiapp.data.networks
 import com.example.digiapp.data.models.serie.SeriesItemResult
 import com.example.digiapp.data.models.quiz.QuestionResult
 import com.example.digiapp.data.models.song.SongResult
+import com.example.digiapp.data.models.tamers.TamersResult
 import retrofit2.http.GET
 
 interface ApiService {
@@ -28,6 +29,10 @@ interface ApiService {
      */
     @GET("quiz.json")
     suspend fun getQuestions(): QuestionResult
+
+
+    @GET("tamers.json")
+    suspend fun getTamers(): TamersResult
 
 
 

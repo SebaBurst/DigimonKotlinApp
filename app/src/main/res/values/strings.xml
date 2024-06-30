@@ -49,4 +49,7 @@
     <string name="answer2">Gabumon</string>
     <string name="answer3">Patamon</string>
     <string name="answer4">Gomamon</string>
+    <string name="sinopsisTitle">Sinopsis</string>
+    <string name="tamer_name">Daisuke</string>
+    <string name="TamersTitle">Tamers</string>
 </resources>

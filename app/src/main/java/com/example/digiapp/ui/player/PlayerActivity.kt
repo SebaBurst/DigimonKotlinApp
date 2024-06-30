@@ -57,7 +57,6 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var musicService: MusicService
     private var serviceBound = false
     private var isPlaying = false
-
     private val viewModel: MusicViewModel by viewModels ()
 
 
