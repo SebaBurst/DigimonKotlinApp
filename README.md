@@ -37,6 +37,11 @@
 </br>
 <img  align="center" src="https://i.imgur.com/uJ46Xxu.png">
 </br>
-## Digidex -  All Digidestined and Digimon Anime Info |  🟢 Current Status: In development
 
+## Digidex -  All Digidestined and Digimon Anime Info |  🟢 Current Status: In development
+-It is a section within the application that contains information about each digimon season, such as the Digidestined and their digimon partners.
+</br>
+</br>
+<img  align="center" src="https://i.imgur.com/5CBbHSy.png">
+</br>
 
